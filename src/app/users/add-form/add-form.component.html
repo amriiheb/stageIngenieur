@@ -1,0 +1,43 @@
+<div class="modal-header">
+        <h4 class="modal-title pull-left">ADD User</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form >
+            <label for="name">Login</label> <br>
+            <input type="text" class="from control" name="login" [(ngModel)]="user.login">
+            <p class="text-danger" > {{errorMsg.login}}</p>
+            
+            <label for="address">Password :</label>
+            <br>
+            <input type="password" class="from control" name="password" [(ngModel)]="user.password">
+            <p class="text-danger" > {{errorMsg.password}}</p>
+  
+            <label for="address">Name :</label>
+            <br>
+            <input type="text" class="from control" name="name" [(ngModel)]="user.name">
+            <br>
+            <label for="address">Age:</label>
+            <br>
+            <input type="text" class="from control" name="name" [(ngModel)]="user.age">
+             <br>
+            <label for="address">TelN :</label>
+            <br>
+            <input type="text" class="from control" name="telnumber" [(ngModel)]="user.telnumber">
+            <br>
+            <label for="address">state :</label>
+            <br>
+            <input type="text" class="from control" name="state" [(ngModel)]="user.state">
+            <br>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="defaultUnchecked" ng-checked="SwitchToAdmin()" (change)="SwitchToAdmin()" >
+              <label _ngcontent-dlc-c1="" class="custom-control-label" for="defaultUnchecked">admin ?</label>
+          </div>
+             <button class="btn btn-primary" (click)="Onsave()">save</button>
+             {{errorMsg1}}
+        </form>
+  
+  
+      </div>

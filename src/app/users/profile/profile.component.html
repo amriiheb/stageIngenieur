@@ -1,0 +1,159 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container emp-profile">
+                <div class="row">
+                   <!--- <div class="col-md-4">
+                        <div class="profile-img">
+                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
+                            <div class="file btn btn-lg btn-primary">
+                                    <input type="file" id="real-file" hidden="hidden" /><span>Change image</span>
+                                  
+                            </div> 
+                        </div>
+                    </div> -->
+                    <div class="col-md-5">
+                        <div class="profile-head">
+                                    <h5>
+                                        {{authGuard.Profile.name}}
+                                    </h5>
+                                    <h6>
+                                        {{authGuard.Profile.profession}}
+                                    </h6>
+                        </div>
+                        <hr  width="100%" color="midnightblue" size="10"> 
+                    
+
+                    </div>
+                    <div class="col-md-3">
+
+                    </div>
+                    <div class="col-md-4">
+                        <button  class="profile-edit-btn" name="btnAddMore" (click)="openModalEdit(Edit)">Edit Profile </button>
+                    </div>
+                </div>
+                <div class="row">
+                    
+                    <div class="col-md-12">
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                             
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label>Name :  {{authGuard.Profile.name}}</label>
+                                            </div>
+                                            
+                                            
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                                <div class="col-md-5">
+
+                                                    <label>Age :{{authGuard.Profile.age}}</label>
+                                                </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col-md-5">
+                                                <label>Email :{{authGuard.Profile.login}}</label>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label>Phone :{{authGuard.Profile.telnumber}}</label>
+                                            </div>
+                                           
+                                        </div>
+                                        <div class="row">
+                                           <div class="col-md-5">
+                                                <label>Profession :{{authGuard.Profile.profession}}</label>
+                                            </div>
+                                            
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                               &nbsp;&nbsp;&nbsp; <label>skills :</label> &nbsp;&nbsp;&nbsp; <br>
+                                        <div *ngFor="let skill of skillsList">
+                                                    
+                                        <button  class="btn btn-warning">{{skill.title}} </button>  &nbsp;&nbsp;&nbsp;
+                                                        
+                                        </div>
+                                        
+                            </div>
+                            
+                        </div>
+                       
+                    </div>
+                    
+                </div>
+        </div>
+        <ng-template #Edit>
+                <div class="modal-header" style="background-color:  rgba(115, 98, 209, 0.1);text-align: center">
+                  <h4 class="modal-title pull-left">Edit Your Profile</h4>
+                  <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body" style="background-color:  rgba(115, 98, 209, 0.1);">
+                  <form >
+                      <label for="name">Login</label> <br>
+                      <input type="text" class="input-group input-group-lg" name="login" [(ngModel)]="editUser.login">
+                      <label  class="text-center"style="color:red">{{errorMsg.login}}</label>         
+                      <br>
+                      <label for="address">Password :</label>
+                      <br>
+                      <input type="password" class="input-group input-group-lg" name="password" [(ngModel)]="editUser.password">
+                      <label  class="text-center"style="color:red">{{errorMsg.password}}</label>         
+                      <br>
+                      <label for="address">Name :</label>
+                      <br>
+                      <input type="text" class="input-group input-group-lgfrom control" name="name" [(ngModel)]="editUser.name">
+                      <label  class="text-center"style="color:red">{{errorMsg.name}}</label>         
+                      <br>
+                      <label for="age">Age :</label>
+                      <br>
+                      <input type="text" class="input-group input-group-lg" name="age" [(ngModel)]="editUser.age">
+                      <br>
+                      <label  class="text-center"style="color:red">{{errorMsg.age}}</label>         
+                      <br>
+                      <label for="address">TelN :</label>
+                      <br>
+                      <input type="text" class="input-group input-group-lgfrom control" name="telnumber" [(ngModel)]="editUser.telnumber">
+                      <label  class="text-center"style="color:red">{{errorMsg.Phone}}</label>         
+
+                      <br>
+                    <label for="profession">Profession :</label>
+                    <input type="text" class="input-group input-group-lg" name="profession" id="profession" [(ngModel)]="editUser.profession" >
+                    <label  class="text-center"style="color:red">{{errorMsg.profession}}</label>         
+
+                    <br>
+                    <label for="skills" style="color: #1e13ac">Add a skill : </label>
+                    <br>
+                   <input type="text"  name="skill"  class="input-group input-group-lg" [(ngModel)]="skill.title">
+                  
+                    <button type="button" class="btn btn-danger" (click)="onAddSkill()" >Add</button>
+                    <div style="margin:5px 0px">
+                       <ul class="list-group">
+                         <li class="list-group-item" *ngFor="let item of  skillsList ;let i=index">
+                            
+                           <span class="text">
+                               {{item.title}}
+                           </span>
+                                   
+                             <span class="hover-cursor">
+                                 <button class="btn btn-danger pull-right" (click)="deleteitemfromskills(i)"> Delete </button>
+           
+                             </span>
+           
+                         </li>
+                      </ul>
+                     </div>
+
+                       <button class="btn btn-primary" (click)="onEdit()">Edit</button>
+                  </form>
+            
+            
+                </div>
+          

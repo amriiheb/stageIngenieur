@@ -1,0 +1,70 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table table-hover " > 
+             <thead>
+                <th scope="col">#</th>
+                <th>title</th>
+                <th>description</th>
+                <th>responsible</th>
+                <th>state</th>
+                <th>Action</th>
+             </thead>
+             <tbody>
+                 <tr *ngFor="let task of Tasks;let i=index"
+                 [ngClass]="{
+                    'text-primary': task.state === 'finished',
+                    'text-success':task.state ==='started',
+                    'text-danger': task.state === 'holding'}">
+                     <th scope="row">{{i}}</th>
+                     <td>{{task.title}}</td>
+                     <td>{{task.description}}</td>
+                     <td *ngFor="let res of task.responsible">{{res.name}}</td>
+                     <td>{{task.state}}</td> 
+                    <td><button class="btn btn-warning pull-left" (click)="openModalView(View,task)"> See More ... </button></td>
+                 </tr>
+             </tbody>
+            </table>
+        </div>
+    </div>
+  </div>
+  <ng-template #View>
+        <div class="modal-header" style="background-color:  rgba(115, 98, 209, 0.1);text-align: center">
+          <h4 class="modal-title pull-left">View Task</h4>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" style="background-color:  rgba(115, 98, 209, 0.1);">
+          <form >
+            <label for="title" style="color: #1e13ac"> Title : </label> {{viewTask.title}}
+            <br>  
+            <label for="description" style="color: #1e13ac">description :</label>   {{viewTask.description}}      <br>
+            <label  for="state" style="color: #1e13ac"> State:</label> {{viewTask.state}} <br>
+            <label  for="state" style="color: #1e13ac"> Prioritie:</label>{{viewTask.prioritie}}
+            <br>
+              
+
+                  <ul class="list-group">
+                    <li class="list-group-item" *ngFor="let item of viewTask.underTask ;let i=index">
+                       <span class="hover-cursor" >
+                        <i class="fa fa-lg" [ngClass]="item.state?'fa-check-circle-o':'fa-circle-thin'" (click)="onChangeStateviewTask(i)" ></i>
+                      </span>
+                      <span class="text">
+                          {{item.title}}
+                      </span>
+                      &nbsp;
+                      &nbsp;
+                      &nbsp;
+                      &nbsp;
+                      &nbsp;
+                    </li>
+                    
+                 </ul>
+      
+               <button class="btn btn-primary" (click)="onEdit()">Confirm</button>
+          </form>
+      
+      
+        </div>
+      </ng-template>
